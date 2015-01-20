@@ -25,6 +25,9 @@ namespace HAT_API_PRD
                                                       , "prmno", "prhno", "prpno" };
         private int[] lookupIntArray = new int[lookupNameArray.Length];
 
+        private Guid uomscheduleid;
+        private Guid uomid;
+
         //lookup
 
         //special
@@ -60,6 +63,9 @@ namespace HAT_API_PRD
 
                 uom = reader.GetOrdinal("unit");
                 new_sunit = reader.GetOrdinal("sunit");
+
+                uomscheduleid = Lookup.RetrieveEntityGuid("uomschedule", EnvironmentSetting.UomScheduleName.ToString(), "name");
+                uomid = Lookup.RetrieveEntityGuid("uom", EnvironmentSetting.Uom.ToString(), "name");
 
                 //special
                 productnumber = reader.GetOrdinal("prdno");
@@ -147,7 +153,7 @@ namespace HAT_API_PRD
                 String recordStr;
                 Guid recordGuid;
                 //這個是產品內建必填欄位
-                entity["defaultuomscheduleid"] = new EntityReference("uomschedule", new Guid("37FB152F-4404-4F62-819F-3D49E43B2ED4"));
+                entity["defaultuomscheduleid"] = new EntityReference("uomschedule", uomscheduleid);
 
                 /// 這個是必填 所以空值有給預設ID
                 /// 
@@ -158,7 +164,7 @@ namespace HAT_API_PRD
                 /// 
                 recordStr = reader.GetString(uom).Trim();
                 if (recordStr == "" || recordStr == null)
-                    entity["defaultuomid"] = new EntityReference("uom", new Guid("41879499-350B-407A-8B16-F00A0AEFC79A"));
+                    entity["defaultuomid"] = new EntityReference("uom", uomid);
                 else
                 {
                     recordGuid = Lookup.RetrieveEntityGuid("uom", recordStr, "name");

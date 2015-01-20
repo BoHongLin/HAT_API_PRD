@@ -130,7 +130,7 @@ namespace HAT_API_PRD
                     break;
             }
             Console.WriteLine("執行完畢...");
-            Console.ReadLine();
+            //Console.ReadLine();
         }
     }
 }
