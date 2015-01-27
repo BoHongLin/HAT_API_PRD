@@ -92,6 +92,14 @@ namespace HAT_API_PRD
                                                     break;
                                                 }
                                             }
+                                            else
+                                            {
+                                                break;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            break;
                                         }
                                     }
                                     //更新DataSync 成功、失敗、完成時間
